@@ -1,0 +1,7 @@
+/.vs
+/src/AkliaJob.Center.Web/bin
+/src/AkliaJob.Center.Web/obj
+/src/AkliaJob.Shared/obj
+/src/AkliaJob.Shared/bin
+/src/AkliaJob.Swagger/obj
+/src/AkliaJob.Swagger/bin
