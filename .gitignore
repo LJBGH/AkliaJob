@@ -5,3 +5,11 @@
 /src/AkliaJob.Shared/bin
 /src/AkliaJob.Swagger/obj
 /src/AkliaJob.Swagger/bin
+/src/AkliaJob.SqlSugar/obj
+/src/AkliaJob.SqlSugar/bin
+/src/AkliaJob.Repository/obj
+/src/AkliaJob.Repository/bin
+/src/AkliaJob.Services/obj
+/src/AkliaJob.Services/bin
+/src/AkliaJob.Models/obj
+/src/AkliaJob.Models/bin
