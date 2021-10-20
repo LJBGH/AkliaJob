@@ -13,3 +13,6 @@
 /src/AkliaJob.Services/bin
 /src/AkliaJob.Models/obj
 /src/AkliaJob.Models/bin
+/src/Aklia.Serilog/bin
+/src/Aklia.Serilog/obj
+/src/AkliaJob.Center.Web/Logs

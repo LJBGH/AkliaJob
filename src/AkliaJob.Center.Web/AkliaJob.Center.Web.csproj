@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Aklia.Serilog\Aklia.Serilog.csproj" />
     <ProjectReference Include="..\AkliaJob.Services\AkliaJob.Services.csproj" />
     <ProjectReference Include="..\AkliaJob.Shared\AkliaJob.Shared.csproj" />
   </ItemGroup>

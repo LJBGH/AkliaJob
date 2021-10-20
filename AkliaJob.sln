@@ -7,25 +7,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Application", "1.Applicat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{8B2316AA-7B81-446E-AF73-62F8DEB4948B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkliaJob.Shared", "src\AkliaJob.Shared\AkliaJob.Shared.csproj", "{E09D8E91-E1C2-45C3-97E2-C195E1131D07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkliaJob.Shared", "src\AkliaJob.Shared\AkliaJob.Shared.csproj", "{E09D8E91-E1C2-45C3-97E2-C195E1131D07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkliaJob.Center.Web", "src\AkliaJob.Center.Web\AkliaJob.Center.Web.csproj", "{E72B3E30-741D-46FC-8A6C-283BF4F8EC34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkliaJob.Center.Web", "src\AkliaJob.Center.Web\AkliaJob.Center.Web.csproj", "{E72B3E30-741D-46FC-8A6C-283BF4F8EC34}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module", "Module", "{AA3A8082-A4E7-4AE7-A551-2C1C51A634DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkliaJob.Swagger", "src\AkliaJob.Swagger\AkliaJob.Swagger.csproj", "{ED46CD87-122F-4875-99FB-0CA41A9AFD46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkliaJob.Swagger", "src\AkliaJob.Swagger\AkliaJob.Swagger.csproj", "{ED46CD87-122F-4875-99FB-0CA41A9AFD46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkliaJob.SqlSugar", "src\AkliaJob.SqlSugar\AkliaJob.SqlSugar.csproj", "{3A91EE87-E0E4-4319-BEFC-809792ED72FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkliaJob.SqlSugar", "src\AkliaJob.SqlSugar\AkliaJob.SqlSugar.csproj", "{3A91EE87-E0E4-4319-BEFC-809792ED72FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Business", "2.Business", "{311A6FC6-3B27-4D55-9456-949B6A88FE86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkliaJob.Services", "src\AkliaJob.Services\AkliaJob.Services.csproj", "{B54BA302-2D9D-4F6B-B23F-0C06DD40AC3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkliaJob.Services", "src\AkliaJob.Services\AkliaJob.Services.csproj", "{B54BA302-2D9D-4F6B-B23F-0C06DD40AC3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkliaJob.Models", "src\AkliaJob.Models\AkliaJob.Models.csproj", "{2E04D248-3D88-4030-8FB0-6FA3AB9819CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkliaJob.Models", "src\AkliaJob.Models\AkliaJob.Models.csproj", "{2E04D248-3D88-4030-8FB0-6FA3AB9819CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkliaJob.Repository", "src\AkliaJob.Repository\AkliaJob.Repository.csproj", "{BDD47513-5AEA-458F-886E-504813969F21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkliaJob.Repository", "src\AkliaJob.Repository\AkliaJob.Repository.csproj", "{BDD47513-5AEA-458F-886E-504813969F21}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{A59AC1E8-A0EC-4567-8FA8-F93FF0EA5F3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aklia.Serilog", "src\Aklia.Serilog\Aklia.Serilog.csproj", "{4A7CBA9C-B9F6-4D73-88AA-033FDC0E0E7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{BDD47513-5AEA-458F-886E-504813969F21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDD47513-5AEA-458F-886E-504813969F21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDD47513-5AEA-458F-886E-504813969F21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A7CBA9C-B9F6-4D73-88AA-033FDC0E0E7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A7CBA9C-B9F6-4D73-88AA-033FDC0E0E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A7CBA9C-B9F6-4D73-88AA-033FDC0E0E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A7CBA9C-B9F6-4D73-88AA-033FDC0E0E7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{B54BA302-2D9D-4F6B-B23F-0C06DD40AC3B} = {311A6FC6-3B27-4D55-9456-949B6A88FE86}
 		{2E04D248-3D88-4030-8FB0-6FA3AB9819CB} = {A59AC1E8-A0EC-4567-8FA8-F93FF0EA5F3A}
 		{BDD47513-5AEA-458F-886E-504813969F21} = {A59AC1E8-A0EC-4567-8FA8-F93FF0EA5F3A}
+		{4A7CBA9C-B9F6-4D73-88AA-033FDC0E0E7E} = {AA3A8082-A4E7-4AE7-A551-2C1C51A634DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F28A3CD1-2D22-403B-93BD-B0A8B65E75E2}
