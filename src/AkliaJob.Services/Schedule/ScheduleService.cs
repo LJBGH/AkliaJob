@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace AkliaJob.Services.Schedule
 {
+    /// <summary>
+    /// 任务计划管理
+    /// </summary>
     public class ScheduleService : IScheduleService
     {
         private readonly IScheduleRepository _scheduleRepository;
@@ -16,6 +19,7 @@ namespace AkliaJob.Services.Schedule
         {
             _scheduleRepository = scheduleRepository;
         }
+
 
         /// <summary>
         /// 添加一条任务计划
@@ -26,5 +30,21 @@ namespace AkliaJob.Services.Schedule
         {
             return await _scheduleRepository.InsertAsync(entity);
         }
+
+
+        /// <summary>
+        /// 执行一条任务计划
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<AjaxResult> ExecuteAsync(Guid id)
+        {
+            var scheduleEntity = await _scheduleRepository.GetByIdAsync(id);
+            if (scheduleEntity == null)
+                return new AjaxResult("未找到该任务", AjaxResultType.Success);
+            
+            throw new NotImplementedException();
+        }
     }
+
 }

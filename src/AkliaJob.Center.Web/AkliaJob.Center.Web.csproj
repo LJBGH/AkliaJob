@@ -4,6 +4,12 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\net5.0\AkliaJob.Center.Web.xml</DocumentationFile>
+    <OutputPath>bin\Debug\net5.0\</OutputPath>
+    <NoWarn>1701;1702;1591;</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.3.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
@@ -16,6 +22,7 @@
     <ProjectReference Include="..\Aklia.Serilog\Aklia.Serilog.csproj" />
     <ProjectReference Include="..\AkliaJob.Services\AkliaJob.Services.csproj" />
     <ProjectReference Include="..\AkliaJob.Shared\AkliaJob.Shared.csproj" />
+    <ProjectReference Include="..\AkliaJob.Swagger\AkliaJob.Swagger.csproj" />
   </ItemGroup>
 
 </Project>

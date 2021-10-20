@@ -24,13 +24,9 @@ namespace AkliaJob.Center.Web
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AkliaJob.Center.Web", Version = "v1" });
-            });
-
+          
             //公共拓展模块注入
-            services.AddCommonModule();
+            services.AddCommonService();
         }
 
         //Autofac模块注入
@@ -45,10 +41,9 @@ namespace AkliaJob.Center.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AkliaJob.Center.Web v1"));
             }
 
+            app.UseCommonExtension();
             //自定义中间件拓展
             app.CustomerMiddleware();
 
