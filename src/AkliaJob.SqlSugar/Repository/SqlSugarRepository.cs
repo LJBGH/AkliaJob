@@ -1,4 +1,5 @@
 ﻿using AkliaJob.Shared;
+using AkliaJob.Shared.AppSetting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SqlSugar;
@@ -17,11 +18,13 @@ namespace AkliaJob.SqlSugar.Repository
         private IAkliaUser _akliaUser;
         private ILogger _logger = null;
 
-        public SqlSugarRepository(IConfiguration configuration,IServiceProvider serviceProvider)
+        public SqlSugarRepository(IServiceProvider serviceProvider)
         {
-            _configuration = configuration;
-            var conn = configuration["AkliaJob:MySql:DbContexts:ConnectionString"];
-            var dbtype = configuration["AkliaJob:MySql:DbContexts:DataBaseType"];
+            //_configuration = configuration;
+            //var conn = configuration["AkliaJob:MySql:DbContexts:ConnectionString"];
+            //var dbtype = configuration["AkliaJob:MySql:DbContexts:DataBaseType"];
+            var conn = Appsettings.app(new string[] { "AkliaJob", "DbContexts", "MySql", "ConnectionString" });
+            var dbtype = Appsettings.app(new string[] { "AkliaJob", "DbContexts", "MySql", "DataBaseType" });
             this._logger = serviceProvider.GetLogger(GetType());
             this._dbContext = SqlSugarDbFactory.GetSqlSugarDb(conn, dbtype, _logger);
             _akliaUser = (serviceProvider.GetService(typeof(IAkliaUser)) as IAkliaUser);

@@ -5,14 +5,18 @@ using System.ComponentModel;
 
 namespace AkliaJob.Models.Schedule
 {
-    public class SchedueEntity : IFullAuditedEntity
+    /// <summary>
+    /// 任务计划表
+    /// </summary>
+    [SugarTable("Schedule")]
+    public class ScheduleEntity : IFullAuditedEntity
     {
         /// <summary>
         /// 主键(任务Id)
         /// </summary>
-        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
+        [SugarColumn(IsPrimaryKey = true/*, IsIdentity = true*/)]
         [DisplayName("主键(任务Id)")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// 任务名称
@@ -71,7 +75,7 @@ namespace AkliaJob.Models.Schedule
         /// <summary>
         /// 执行间隔时间, 秒为单位
         /// </summary>
-        [DisplayName("执行间隔时间")]
+        [DisplayName("")]
         public int IntervalSecond { get; set; }
 
 

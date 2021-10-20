@@ -9,7 +9,7 @@ namespace AkliaJob.Repository.Schedule
 {
     public class ScheduleRepository : SqlSugarRepository<ScheduleEntity>, IScheduleRepository
     {
-        public ScheduleRepository(IConfiguration configuration, IServiceProvider serviceProvider) : base(configuration, serviceProvider)
+        public ScheduleRepository(IServiceProvider serviceProvider) : base(serviceProvider)
         {
 
         }
