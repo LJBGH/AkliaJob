@@ -33,8 +33,14 @@ namespace AkliaJob.Models.Schedule
         /// <summary>
         /// 任务状态
         /// </summary>
-        [DisplayName("状态")]
+        [DisplayName("任务状态")]
         public JobStatus JobStatus { get; set; }
+
+        /// <summary>
+        /// 任务运行状态
+        /// </summary>
+        [DisplayName("任务运行状态")]
+        public RunStatus RunStatus { get; set; }
 
         /// <summary>
         /// 任务运行时间表达式
@@ -65,6 +71,11 @@ namespace AkliaJob.Models.Schedule
         /// </summary>
         [DisplayName("结束时间")]
         public DateTime? EndTime { get; set; }
+
+        /// <summary>
+        /// 下次执行时间
+        /// </summary>
+        public DateTime? NextTime { get; set; }
 
         /// <summary>
         /// 触发器类型
@@ -130,14 +141,30 @@ namespace AkliaJob.Models.Schedule
     public enum JobStatus 
     {
         /// <summary>
+        /// 已启用
+        /// </summary>
+        Enabled = 0,
+
+        /// <summary>
+        /// 已停止
+        /// </summary>
+        Stoped = 1
+    }
+
+    /// <summary>
+    /// 任务运行状态
+    /// </summary>
+    public enum RunStatus
+    {
+        /// <summary>
         /// 运行中
         /// </summary>
         Runing = 0,
 
         /// <summary>
-        /// 已暂停
+        /// 待运行
         /// </summary>
-        Suspended = 1
+        StayRun = 1
     }
 
     /// <summary>

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using AkliaJob.Swagger;
 using Microsoft.AspNetCore.Builder;
+using AkliaJob.Services.Schedule;
+using System.Threading;
 
 namespace AkliaJob.Center.Web.StartupModule
 {
@@ -25,7 +27,20 @@ namespace AkliaJob.Center.Web.StartupModule
         public static IApplicationBuilder UseCommonExtension(this IApplicationBuilder app) 
         {
             app.UseSwaggerService();
+
+            //开启定时任务
+            app.StartJob();
             return app;
+        }
+
+
+        public static void StartJob(this IApplicationBuilder app)
+        {
+            var scheduleService = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<IScheduleService>();
+
+            var startJob = new StartJob(scheduleService);
+
+            System.Threading.Tasks.Task.Run(async () => { await  startJob.StartJobAsync(); });
         }
 
     }

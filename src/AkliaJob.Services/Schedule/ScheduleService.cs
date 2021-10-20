@@ -1,4 +1,5 @@
 ﻿using AkliaJob.Models.Schedule;
+using AkliaJob.Quertz;
 using AkliaJob.Repository.Schedule;
 using AkliaJob.Shared;
 using System;
@@ -20,6 +21,14 @@ namespace AkliaJob.Services.Schedule
             _scheduleRepository = scheduleRepository;
         }
 
+        /// <summary>
+        /// 获取所有计划任务
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<ScheduleEntity>> GetAllASync()
+        {
+            return await _scheduleRepository.GetAsync();
+        }
 
         /// <summary>
         /// 添加一条任务计划
@@ -42,9 +51,22 @@ namespace AkliaJob.Services.Schedule
             var scheduleEntity = await _scheduleRepository.GetByIdAsync(id);
             if (scheduleEntity == null)
                 return new AjaxResult("未找到该任务", AjaxResultType.Success);
-            
-            throw new NotImplementedException();
+
+            ScheduleManage.Instance.AddScheduleList(scheduleEntity);
+
+            QuartzNetResult result;
+            if (scheduleEntity.TriggerType == TriggerType.Simple)
+            {
+                result = await SchedulerCenter.Instance.RunSchedule<ScheduleManage>(scheduleEntity.JobGroup, scheduleEntity.JobName);
+                //result = SchedulerCenter.Instance.RunScheduleJob<>
+            }
+            else 
+            {
+                result = await SchedulerCenter.Instance.RunSchedule<ScheduleManage>(scheduleEntity.JobGroup, scheduleEntity.JobName);
+            }
+            return new AjaxResult(result.Success == true ? "执行成功" : "执行失败", result.Success == true ? AjaxResultType.Success : AjaxResultType.Error);
         }
+
     }
 
 }

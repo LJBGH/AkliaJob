@@ -10,6 +10,8 @@ namespace AkliaJob.Services.Schedule
     public interface IScheduleService
     {
 
+        Task<List<ScheduleEntity>> GetAllASync();
+
         /// <summary>
         /// 添加一条任务计划 
         /// </summary>

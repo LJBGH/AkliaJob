@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AkliaJob.Quertz\AkliaJob.Quertz.csproj" />
-    <ProjectReference Include="..\AkliaJob.Repository\AkliaJob.Repository.csproj" />
+    <PackageReference Include="Quartz" Version="3.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AkliaJob.Models\AkliaJob.Models.csproj" />
   </ItemGroup>
 
 </Project>

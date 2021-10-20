@@ -16,3 +16,9 @@
 /src/Aklia.Serilog/bin
 /src/Aklia.Serilog/obj
 /src/AkliaJob.Center.Web/Logs
+/src/AkliaJob.Serilog/obj
+/src/AkliaJob.Serilog/bin
+/src/AkliaJob.TaskService/obj
+/src/AkliaJob.TaskService/bin
+/src/AkliaJob.Quertz/obj
+/src/AkliaJob.Quertz/bin
