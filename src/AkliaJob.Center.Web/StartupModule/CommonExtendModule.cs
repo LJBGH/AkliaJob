@@ -7,6 +7,9 @@ using AkliaJob.Swagger;
 using Microsoft.AspNetCore.Builder;
 using AkliaJob.Services.Schedule;
 using System.Threading;
+using AkliaJob.Quertz;
+using Quartz.Spi;
+using AkliaJob.TaskService;
 
 namespace AkliaJob.Center.Web.StartupModule
 {
@@ -22,6 +25,12 @@ namespace AkliaJob.Center.Web.StartupModule
 
             service.AddHttpContextAccessor();
             service.AddSingleton<IAkliaUser, AkliaUser>();
+
+            //调度中心注入
+            service.AddSingleton<IScheduleCenter, SchedulerCenter>();
+            service.AddSingleton<IJobFactory, IOCJobFactory>();
+            service.AddTransient(typeof(TestJob));
+           
         }
 
         public static IApplicationBuilder UseCommonExtension(this IApplicationBuilder app) 
@@ -38,9 +47,7 @@ namespace AkliaJob.Center.Web.StartupModule
         {
             var scheduleService = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<IScheduleService>();
 
-            var startJob = new StartJob(scheduleService);
-
-            System.Threading.Tasks.Task.Run(async () => { await  startJob.StartJobAsync(); });
+            scheduleService.StartScheduleAsync();
         }
 
     }

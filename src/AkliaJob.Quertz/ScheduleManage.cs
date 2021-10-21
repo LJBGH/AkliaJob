@@ -48,7 +48,7 @@ namespace AkliaJob.Quertz
         /// <param name="jobGroup">任务分组</param>
         /// <param name="jobName">任务名称</param>
         /// <returns></returns>
-        public virtual ScheduleEntity GetScheduleModel(string jobGroup, string jobName)
+        public virtual ScheduleEntity GetScheduleModel(string jobName, string jobGroup)
         {
             return ScheduleList.Where(w => w.JobName == jobName && w.JobGroup == jobGroup).FirstOrDefault();
         }
@@ -59,7 +59,7 @@ namespace AkliaJob.Quertz
         /// <param name="jobGroup"></param>
         /// <param name="jobName"></param>
         /// <returns></returns>
-        public virtual ScheduleEntity RemoveScheduleModel(string jobGroup, string jobName)
+        public virtual ScheduleEntity RemoveScheduleModel(string jobName, string jobGroup)
         {
             ScheduleEntity scheduleModel = this.GetScheduleModel(jobGroup, jobName);
             if (scheduleModel != null)

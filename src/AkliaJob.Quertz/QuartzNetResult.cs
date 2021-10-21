@@ -6,10 +6,12 @@ namespace AkliaJob.Quertz
 {
     public class QuartzNetResult
     {
-        /// <summary>
-        /// 状态码
-        /// </summary>
-        public int Code { get; set; }
+        public QuartzNetResult(string msg, bool success=true)
+        {
+            Msg = msg;
+            Success = success;
+        }
+
         /// <summary>
         /// 消息
         /// </summary>

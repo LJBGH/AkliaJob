@@ -22,3 +22,5 @@
 /src/AkliaJob.TaskService/bin
 /src/AkliaJob.Quertz/obj
 /src/AkliaJob.Quertz/bin
+/src/AkliaJob.App/obj
+/src/AkliaJob.App/bin

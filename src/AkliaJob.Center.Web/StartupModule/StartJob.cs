@@ -24,8 +24,8 @@ namespace AkliaJob.Center.Web.StartupModule
             var List = scheduleList.Where(x => x.JobStatus == JobStatus.Enabled).ToList();
             foreach (var item in List)
             {
-                ScheduleManage.Instance.AddScheduleList(item);
-                await SchedulerCenter.Instance.RunSchedule<ScheduleManage>(item.JobGroup, item.JobName);
+                //ScheduleManage.Instance.AddScheduleList(item);
+                //await SchedulerCenter.Instance.RunSchedule<ScheduleManage>(item.JobName, item.JobGroup);
             }
 
         }

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using AkliaJob.Shared;
+using AkliaJob.Quertz;
 
 namespace AkliaJob.Center.Web
 {
@@ -24,7 +25,7 @@ namespace AkliaJob.Center.Web
         {
 
             services.AddControllers();
-          
+
             //公共拓展模块注入
             services.AddCommonService();
         }

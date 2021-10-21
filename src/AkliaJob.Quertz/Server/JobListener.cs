@@ -37,7 +37,7 @@ namespace AkliaJob.Quertz.Server
             await Task.CompletedTask;
             count++;
             var manage = new ScheduleManage();
-            var model = manage.GetScheduleModel(context.JobDetail.Key.Group, context.JobDetail.Key.Name);
+            var model = manage.GetScheduleModel(context.JobDetail.Key.Name, context.JobDetail.Key.Group);
             Console.WriteLine(model.JobName + "job执行结束之后调用  " + count);
         }
     }

@@ -11,6 +11,20 @@ namespace AkliaJob.Services.Schedule
     {
         Task<List<ScheduleEntity>> GetAllASync();
 
+
+        /// <summary>
+        /// 开启任务调度
+        /// </summary>
+        /// <param name="schedules"></param>
+        /// <returns></returns>
+        Task<AjaxResult> StartScheduleAsync();
+
+        /// <summary>
+        /// 关闭任务调度
+        /// </summary>
+        /// <returns></returns>
+        Task<AjaxResult> StopScheduleAsync();
+
         /// <summary>
         /// 添加一条任务计划 
         /// </summary>

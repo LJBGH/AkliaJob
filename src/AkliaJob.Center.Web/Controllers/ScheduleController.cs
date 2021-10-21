@@ -27,17 +27,29 @@ namespace AkliaJob.Center.Web.Controllers
 
 
         /// <summary>
-        /// Test测试
+        /// 开启任务调度
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
         [HttpGet]
-        [DisplayName("Test测试")]
-        public async Task<AjaxResult> Test()
+        [DisplayName("开启任务调度")]
+        public async Task<AjaxResult> StartScheduleAsync() 
         {
-            await Task.CompletedTask;
-            throw new Exception("Error ");
+            return await _scheduleService.StartScheduleAsync();
         }
+
+        /// <summary>
+        /// 停止任务调度
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [DisplayName("停止任务调度")]
+        public async Task<AjaxResult> StopScheduleAsync() 
+        {
+            return await _scheduleService.StopScheduleAsync();
+        }
+
 
         /// <summary>
         /// 添加一条任务计划
