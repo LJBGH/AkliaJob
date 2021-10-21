@@ -20,7 +20,7 @@ namespace AkliaJob.App
             }
         }
 
-        public WebSocketClientHelper wSocketClient = new WebSocketClientHelper("wss://localhost:5000/");
+        public WWebSocketClientHelper wSocketClient = new WWebSocketClientHelper("wss://localhost:5000/");
         public void Go()
         {
             wSocketClient.OnOpen -= WSocketClient_OnOpen;

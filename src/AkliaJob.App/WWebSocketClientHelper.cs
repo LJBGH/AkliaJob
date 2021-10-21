@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AkliaJob.App
 {
-    public class WebSocketClientHelper
+    public class WWebSocketClientHelper
     {
         ClientWebSocket ws = null;
         Uri uri = null;
@@ -42,7 +42,7 @@ namespace AkliaJob.App
         /// </summary>
         public event EventHandler OnClose;
 
-        public WebSocketClientHelper(string wsUrl)
+        public WWebSocketClientHelper(string wsUrl)
         {
             uri = new Uri(wsUrl);
             ws = new ClientWebSocket();

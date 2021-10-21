@@ -11,7 +11,6 @@ namespace AkliaJob.App
     {
         static async Task Main(string[] args)
         {
-
             await StartWebSocket();
 
             CreateHostBuilder(args).Build().Run();
@@ -25,8 +24,6 @@ namespace AkliaJob.App
                 {
 
                 });
-
-
 
 
         /// <summary>
@@ -79,8 +76,5 @@ namespace AkliaJob.App
                 }
             }
         }
-
-
-
     }
 }
