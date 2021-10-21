@@ -29,6 +29,10 @@ namespace AkliaJob.App
 
 
 
+        /// <summary>
+        /// Socket客户端连接
+        /// </summary>
+        /// <returns></returns>
         static async Task StartWebSocket() 
         {
             try
