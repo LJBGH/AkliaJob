@@ -9,7 +9,6 @@ namespace AkliaJob.Services.Schedule
 {
     public interface IScheduleService
     {
-
         Task<List<ScheduleEntity>> GetAllASync();
 
         /// <summary>
@@ -20,11 +19,25 @@ namespace AkliaJob.Services.Schedule
         Task<AjaxResult> InsertAsync(ScheduleEntity entity);
 
         /// <summary>
-        /// 执行任务计划
+        /// 执行任务
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         Task<AjaxResult> ExecuteAsync(Guid id);
+
+        /// <summary>
+        /// 停止任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<AjaxResult> StopAsync(Guid id);
+
+        /// <summary>
+        /// 恢复任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<AjaxResult> ResumeAsync(Guid id);
 
     }
 }

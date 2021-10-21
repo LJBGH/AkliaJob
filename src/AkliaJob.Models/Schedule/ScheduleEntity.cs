@@ -55,6 +55,18 @@ namespace AkliaJob.Models.Schedule
         public string Remark { get; set; }
 
         /// <summary>
+        /// 任务所在DLL对应的程序集名称
+        /// </summary>
+        [DisplayName("任务所在DLL对应的程序集名称")]
+        public string AssemblyName { get; set; }
+
+        /// <summary>
+        /// 任务所在类
+        /// </summary>                                                  0
+        [DisplayName("任务所在类名称")]
+        public string ClassName { get; set; }
+
+        /// <summary>
         /// 执行次数
         /// </summary>
         [DisplayName("执行次数")]
@@ -86,20 +98,12 @@ namespace AkliaJob.Models.Schedule
         /// <summary>
         /// 执行间隔时间, 秒为单位
         /// </summary>
-        [DisplayName("")]
+        [DisplayName("执行间隔时间, 秒为单位")]
         public int IntervalSecond { get; set; }
 
 
 
-        ///// <summary>
-        ///// 任务所在DLL对应的程序集名称
-        ///// </summary>
-        //public string AssemblyName { get; set; }    
 
-        ///// <summary>
-        ///// 任务所在类
-        ///// </summary>
-        //public string ClassName { get; set; }
 
 
         #region   通用字段
@@ -141,14 +145,15 @@ namespace AkliaJob.Models.Schedule
     public enum JobStatus 
     {
         /// <summary>
-        /// 已启用
+        /// 停止
         /// </summary>
-        Enabled = 0,
+        Stoped = 0,
 
         /// <summary>
-        /// 已停止
+        /// 启用
         /// </summary>
-        Stoped = 1
+        Enabled = 1
+
     }
 
     /// <summary>
@@ -157,14 +162,14 @@ namespace AkliaJob.Models.Schedule
     public enum RunStatus
     {
         /// <summary>
-        /// 运行中
-        /// </summary>
-        Runing = 0,
-
-        /// <summary>
         /// 待运行
         /// </summary>
-        StayRun = 1
+        StayRun = 0,
+
+        /// <summary>
+        /// 运行中
+        /// </summary>
+        Runing = 1
     }
 
     /// <summary>

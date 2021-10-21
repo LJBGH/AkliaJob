@@ -59,7 +59,7 @@ namespace AkliaJob.Quertz
         /// <param name="jobGroup"></param>
         /// <param name="jobName"></param>
         /// <returns></returns>
-        public async Task<QuartzNetResult> RunSchedule<T>(string jobGroup, string jobName) where T : ScheduleManage
+        public async Task<QuartzNetResult> RunSchedule<T>(string jobName, string jobGroup) where T : ScheduleManage
         {
             QuartzNetResult result;
             //开启调度器
@@ -83,7 +83,7 @@ namespace AkliaJob.Quertz
                     Msg = "启动成功"
                 };
             }
-            else 
+            else
             {
                 result = new QuartzNetResult
                 {
@@ -126,7 +126,7 @@ namespace AkliaJob.Quertz
                 {
                     trigger = CreateCronTrigger(schedule);
                 }
-                else 
+                else
                 {
                     trigger = CreateSimpleTrigger(schedule);
                 }
@@ -148,6 +148,119 @@ namespace AkliaJob.Quertz
             }
 
             return result;
+        }
+
+
+        /// <summary>
+        /// 暂停任务计划
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="jobName"></param>
+        /// <param name="jobGroup"></param>
+        /// <param name="isDelete"></param>
+        /// <returns></returns>
+        public async Task<QuartzNetResult> StopScheduleJob<T>(string jobName, string jobGroup, bool isDelete = false) where T : ScheduleManage, new()
+        {
+            var result = new QuartzNetResult();
+            try
+            {
+                //检查任务是否已存在
+                var jk = new JobKey(jobName, jobGroup);
+                if (!await this.Scheduler.Result.CheckExists(jk))
+                {
+                    return new QuartzNetResult
+                    {
+                        Success = false,
+                        Msg = "任务未运行",
+                        Code = 201
+                    };
+                }
+                //暂停任务
+                await this.Scheduler.Result.PauseJob(jk);
+
+                //是否移除任务
+                if (isDelete)
+                {
+                    Activator.CreateInstance<T>().RemoveScheduleModel(jobGroup, jobName);
+                }
+                result = new QuartzNetResult
+                {
+                    Success = true,
+                    Msg = "停止任务成功",
+                    Code = 200
+                };
+
+            }
+            catch (Exception ex)
+            {
+                result = new QuartzNetResult
+                {
+                    Success = false,
+                    Msg = "任务停止失败" + ex.Message,
+                    Code = 201
+                };
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 恢复运行暂停的任务(暂停之后继续运行)
+        /// </summary>
+        /// <param name="jobName"></param>
+        /// <param name="JobGroup"></param>
+        /// <returns></returns>
+        public async Task<QuartzNetResult> ResumeJob(string jobName, string jobGroup) 
+        {
+            var result = new QuartzNetResult();
+            try
+            {
+                //检查任务是否已存在
+                var jk = new JobKey(jobName, jobGroup);
+                if (!await this.Scheduler.Result.CheckExists(jk))
+                {
+                    result = new QuartzNetResult
+                    {
+                        Success = false,
+                        Msg = "任务未运行",
+                        Code = 201
+                    };
+                }
+                //恢复运行暂停任务
+                await this.Scheduler.Result.ResumeJob(jk);
+                result = new QuartzNetResult
+                {
+                    Success = true,
+                    Msg = "恢复运行任务成功",
+                    Code = 200
+                };
+            }
+            catch (Exception ex) 
+            {
+                result = new QuartzNetResult
+                {
+                    Success = false,
+                    Msg = "恢复运行任务失败" + ex.Message,
+                    Code = 201
+                };
+            }
+            return result;       
+        }
+
+        public async Task StopScheduleAsync() 
+        {
+            try
+            {
+                //判断调度是否已经关闭
+                if (!this.Scheduler.Result.IsShutdown) 
+                {
+                    await this.Scheduler.Result.Shutdown();
+                    Console.WriteLine("任务调度停止");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("任务调度失败" + ex.Message);
+            }
         }
 
 
@@ -175,15 +288,16 @@ namespace AkliaJob.Quertz
                 return TriggerBuilder.Create()
                      .WithIdentity(schedule.JobName, schedule.JobGroup)
                      .StartAt(schedule.BeginTime)//开始时间
-                     .EndAt(schedule.EndTime)//结束数据
+                     .EndAt(schedule.EndTime)//结束时间
                      .WithSimpleSchedule(x => x
                          .WithIntervalInSeconds(schedule.IntervalSecond)//执行时间间隔，单位秒
                          .RepeatForever())   //无线循环
                          .ForJob(schedule.JobName, schedule.JobGroup)//作业名称
                      .Build();
             }
-
         }
+
+
 
 
         /// <summary>

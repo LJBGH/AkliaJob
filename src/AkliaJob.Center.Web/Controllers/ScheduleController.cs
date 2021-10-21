@@ -52,15 +52,40 @@ namespace AkliaJob.Center.Web.Controllers
         }
 
         /// <summary>
-        /// 执行一条任务计划
+        /// 执行任务
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [DisplayName("执行一条任务计划")]
+        [DisplayName("执行任务")]
         public async Task<AjaxResult> ExecuteAsync(Guid id) 
         {
             return await _scheduleService.ExecuteAsync(id);
         }
+
+        /// <summary>
+        /// 停止任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [DisplayName("停止任务")]
+        public async Task<AjaxResult> StopAsync(Guid id) 
+        {
+            return await _scheduleService.StopAsync(id);
+        }
+
+        /// <summary>
+        /// 恢复任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [DisplayName("恢复任务")]
+        public async Task<AjaxResult> ResumeAsync(Guid id)
+        {
+            return await _scheduleService.ResumeAsync(id);
+        }
+
     }
 }

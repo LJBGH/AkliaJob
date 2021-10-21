@@ -42,31 +42,80 @@ namespace AkliaJob.Services.Schedule
 
 
         /// <summary>
-        /// 执行一条任务计划
+        /// 执行任务
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public async Task<AjaxResult> ExecuteAsync(Guid id)
         {
-            var scheduleEntity = await _scheduleRepository.GetByIdAsync(id);
-            if (scheduleEntity == null)
+            var schedule = await _scheduleRepository.GetByIdAsync(id);
+            if (schedule == null)
                 return new AjaxResult("未找到该任务", AjaxResultType.Success);
 
-            ScheduleManage.Instance.AddScheduleList(scheduleEntity);
+            ScheduleManage.Instance.AddScheduleList(schedule);
 
             QuartzNetResult result;
-            if (scheduleEntity.TriggerType == TriggerType.Simple)
+            if (schedule.TriggerType == TriggerType.Simple)
             {
-                result = await SchedulerCenter.Instance.RunSchedule<ScheduleManage>(scheduleEntity.JobGroup, scheduleEntity.JobName);
+                result = await SchedulerCenter.Instance.RunSchedule<ScheduleManage>(schedule.JobName, schedule.JobGroup);
                 //result = SchedulerCenter.Instance.RunScheduleJob<>
             }
             else 
             {
-                result = await SchedulerCenter.Instance.RunSchedule<ScheduleManage>(scheduleEntity.JobGroup, scheduleEntity.JobName);
+                result = await SchedulerCenter.Instance.RunSchedule<ScheduleManage>(schedule.JobName, schedule.JobGroup);
+            }
+
+            if (result.Success == true) 
+            {
+                schedule.JobStatus = JobStatus.Enabled;
+                await _scheduleRepository.UpdateAsync(schedule);
             }
             return new AjaxResult(result.Success == true ? "执行成功" : "执行失败", result.Success == true ? AjaxResultType.Success : AjaxResultType.Error);
         }
 
-    }
+        /// <summary>
+        /// 停止任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<AjaxResult> StopAsync(Guid id)
+        {
+            var schedule = await _scheduleRepository.GetByIdAsync(id);
+            if (schedule == null)
+                return new AjaxResult("未找到该任务", AjaxResultType.Success);
 
+            var result = await SchedulerCenter.Instance.StopScheduleJob<ScheduleManage>(schedule.JobName, schedule.JobGroup);
+            if (result.Success == true) 
+            {
+                schedule.JobStatus = JobStatus.Stoped;
+                await _scheduleRepository.UpdateAsync(schedule);
+            }
+            return new AjaxResult(result.Success == true ? "停止任务成功" : "停止任务失败", result.Success == true ? AjaxResultType.Success : AjaxResultType.Error);
+        }
+
+        /// <summary>
+        /// 恢复任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<AjaxResult> ResumeAsync(Guid id)
+        {
+            var scheduleEntity = await _scheduleRepository.GetByIdAsync(id);
+            if (scheduleEntity == null)
+                return new AjaxResult("未找到该任务", AjaxResultType.Success);
+
+            var schedule = await _scheduleRepository.GetByIdAsync(id);
+            if (schedule == null)
+                return new AjaxResult("未找到该任务", AjaxResultType.Success);
+
+            var result = await SchedulerCenter.Instance.ResumeJob(schedule.JobName, schedule.JobGroup);
+
+            if (result.Success == true)
+            {
+                schedule.JobStatus = JobStatus.Enabled;
+                await _scheduleRepository.UpdateAsync(schedule);
+            }
+            return new AjaxResult(result.Success == true ? "恢复任务成功" : "恢复任务失败", result.Success == true ? AjaxResultType.Success : AjaxResultType.Error);
+        }
+    }
 }
