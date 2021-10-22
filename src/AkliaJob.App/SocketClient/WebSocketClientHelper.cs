@@ -52,6 +52,9 @@ namespace AkliaJob.App.SocketClient
         public event EventHandler OnClose;
 
 
+        /// <summary>
+        /// 打开连接
+        /// </summary>
         public void Open()
         {
             Task.Run(async () =>
@@ -105,7 +108,7 @@ namespace AkliaJob.App.SocketClient
         }
 
         /// <summary>
-        /// 发送消息
+        /// 发送文本消息
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
@@ -124,6 +127,27 @@ namespace AkliaJob.App.SocketClient
                 Console.WriteLine("发送失败"+ ex.Message);
                 return false;
             }    
+        }
+
+        /// <summary>
+        /// 发送字节消息
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public async Task<bool> SendByteMsg(byte[] bytes)
+        {
+            if (_wsClient.State != WebSocketState.Open)
+                return false;
+            try
+            {
+                await _wsClient.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, CancellationToken.None);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("发送失败" + ex.Message);
+                return false;
+            }
         }
     }
 }

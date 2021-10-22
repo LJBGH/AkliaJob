@@ -20,5 +20,16 @@ namespace AkliaJob.Shared
             ILoggerFactory factory = provider.GetService<ILoggerFactory>();
             return factory.CreateLogger(type);
         }
+
+        /// <summary>
+        /// 获取指定类型的日志对象
+        /// </summary>
+        /// <typeparam name="T">非静态强类型</typeparam>
+        /// <returns>日志对象</returns>
+        public static ILogger<T> GetLogger<T>(this IServiceProvider provider)
+        {
+            ILoggerFactory factory = provider.GetService<ILoggerFactory>();
+            return factory.CreateLogger<T>();
+        }
     }
 }

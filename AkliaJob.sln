@@ -35,7 +35,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QuertzNet", "QuertzNet", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkliaJob.TaskService", "src\AkliaJob.TaskService\AkliaJob.TaskService.csproj", "{0E4D87C7-8D57-45D8-9F5B-D1487F49CB91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkliaJob.App", "src\AkliaJob.App\AkliaJob.App.csproj", "{2F03933A-A2B6-43C6-9743-909A425E9479}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkliaJob.App", "src\AkliaJob.App\AkliaJob.App.csproj", "{2F03933A-A2B6-43C6-9743-909A425E9479}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkliaJob.WebSockets", "AkliaJob.WebSockets\AkliaJob.WebSockets.csproj", "{11BD6063-0EC5-4822-9DEB-F917E20A2F84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{2F03933A-A2B6-43C6-9743-909A425E9479}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F03933A-A2B6-43C6-9743-909A425E9479}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F03933A-A2B6-43C6-9743-909A425E9479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11BD6063-0EC5-4822-9DEB-F917E20A2F84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11BD6063-0EC5-4822-9DEB-F917E20A2F84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11BD6063-0EC5-4822-9DEB-F917E20A2F84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11BD6063-0EC5-4822-9DEB-F917E20A2F84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +109,7 @@ Global
 		{4D30FFCE-700E-49B8-9C7A-941C8A4CE2A3} = {26257E0C-DD5B-400D-A7AB-0DEC4FC52D3F}
 		{0E4D87C7-8D57-45D8-9F5B-D1487F49CB91} = {26257E0C-DD5B-400D-A7AB-0DEC4FC52D3F}
 		{2F03933A-A2B6-43C6-9743-909A425E9479} = {2BBB923D-B47B-48A6-952B-AF0AC18B886C}
+		{11BD6063-0EC5-4822-9DEB-F917E20A2F84} = {AA3A8082-A4E7-4AE7-A551-2C1C51A634DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F28A3CD1-2D22-403B-93BD-B0A8B65E75E2}
