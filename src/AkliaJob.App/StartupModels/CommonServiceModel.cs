@@ -10,18 +10,18 @@ using System.Threading.Tasks;
 
 namespace AkliaJob.App.StartupModels
 {
-    public class CommonServiceModel
+    public static class CommonServiceModel
     {
         /// <summary>
         /// 自定义模块构建
         /// </summary>
         /// <returns></returns>
-        public static IServiceProvider ServicesBilder() 
+        public static IServiceProvider ServicesBilder(this IServiceCollection services) 
         {
-            IServiceCollection services = new ServiceCollection();
+            //IServiceCollection services = new ServiceCollection();
 
             //添加Nlog日志
-            services.AddNLog();
+            //services.AddNLog();
 
             IScheduleRepository scheduleRepository;
 

@@ -12,7 +12,7 @@ namespace AkliaJob.App.Extensions
     public static class NlogExtension
     {
         /// <summary>
-        /// 添加Nlog日志
+        /// 添加日志
         /// </summary>
         /// <param name="services"></param>
         public static void AddNLog(this IServiceCollection services) 

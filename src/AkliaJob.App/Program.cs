@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using AkliaJob.Shared;
 using Microsoft.Extensions.Logging;
 using AkliaJob.App.StartupModels;
+using Serilog;
+using AkliaJob.App.Extensions;
 
 namespace AkliaJob.App
 {
@@ -19,36 +21,74 @@ namespace AkliaJob.App
         private static CancellationTokenSource _sendLoopTokenSource;
 
         static async Task Main(string[] args)
-        {         
+        {
             //构建服务
-            var serviceProvider = CommonServiceModel.ServicesBilder();
+            //var serviceProvider = CommonServiceModel.ServicesBilder();
 
-            var testService = serviceProvider.GetService<ITestService>();
-
-            var logger = serviceProvider.GetLogger<Program>();
+            //var testService = serviceProvider.GetService<ITestService>();
+            //var logger = serviceProvider.GetLogger<Program>();
 
 
             //开启WenSockert连接
-            var isConn  = await TryConnectWebSocket();
+            //var isConn  = await TryConnectWebSocket();
 
-            if (isConn) 
-            {
-                await StartReceiving(client, testService, logger);
-            }
+            //if (isConn) 
+            //{
+            //    await Heartbeat();
+            //    await StartReceiving(client, testService, logger);
+
+            //}
+
+
+
+
+            //Log.Logger = new LoggerConfiguration()
+            //    .Enrich.FromLogContext()
+            //    .WriteTo.Console()// 配置日志输出到控制台
+            //    .WriteTo.File("logserilog.txt", rollingInterval: RollingInterval.Day) //配置日志输出文件，生成周期每天
+            //    .CreateLogger();
+            //try
+            //{
+            //    Log.Information("Starting up");
+            //    CreateHostBuilder(args).Build().Run();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Log.Fatal(ex, "Application start-up failed");
+            //}
+            //finally
+            //{
+            //    Log.CloseAndFlush();
+            //}
 
             CreateHostBuilder(args).Build().Run();
+
         }
 
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 //.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-                .ConfigureServices((hostContext, services) =>
+                .ConfigureServices(async (hostContext, services) =>
                 {
+                    //构建服务
+                    var servicePrivier = services.ServicesBilder();
+                    var testService = servicePrivier.GetService<ITestService>();
+                    var logger = servicePrivier.GetLogger<Program>();
 
-                });
+                    //开启WenSockert连接
+                    var isConn = await TryConnectWebSocket();
 
-        
+                    if (isConn)
+                    {
+                        await Heartbeat();
+                        await StartReceiving(client, testService, logger);
+                    }
+                })
+     
+                .UseSerilog()
+                .AddSerilog();
+
 
         /// <summary>
         /// WebSocket连接开启
@@ -88,6 +128,39 @@ namespace AkliaJob.App
         }
 
         /// <summary>
+        /// 心跳检测
+        /// </summary>
+        /// <returns></returns>
+        static async Task Heartbeat() 
+        {
+            var token = _sendLoopTokenSource.Token;
+            var data = Encoding.UTF8.GetBytes("sent ping to server");
+            var i = 0;
+            while (i < 10 && !token.IsCancellationRequested) 
+            {
+                await Task.Delay(1000, token);
+                if (client?.State == WebSocketState.Open) 
+                {
+                    try
+                    {
+                        if (!token.IsCancellationRequested) 
+                        {
+                            await client.SendAsync(new ArraySegment<byte>(data), WebSocketMessageType.Text, true, CancellationToken.None);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                    }
+                }
+
+                i++;
+            }
+        }
+
+
+
+        /// <summary>
         /// 监听接收消息
         /// </summary>
         /// <param name="client"></param>
@@ -113,7 +186,7 @@ namespace AkliaJob.App
                         //文本类型消息
                         if (result.MessageType == WebSocketMessageType.Text)
                         {
-                            await testService.TestAsync();
+                            //await testService.TestAsync();
                             string msg = Encoding.UTF8.GetString(buffer, 0, result.Count);
                             logger.LogInformation($"{msg}");
                         }
