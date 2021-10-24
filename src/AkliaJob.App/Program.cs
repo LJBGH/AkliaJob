@@ -42,24 +42,24 @@ namespace AkliaJob.App
 
 
 
-            //Log.Logger = new LoggerConfiguration()
-            //    .Enrich.FromLogContext()
-            //    .WriteTo.Console()// 配置日志输出到控制台
-            //    .WriteTo.File("logserilog.txt", rollingInterval: RollingInterval.Day) //配置日志输出文件，生成周期每天
-            //    .CreateLogger();
-            //try
-            //{
-            //    Log.Information("Starting up");
-            //    CreateHostBuilder(args).Build().Run();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Fatal(ex, "Application start-up failed");
-            //}
-            //finally
-            //{
-            //    Log.CloseAndFlush();
-            //}
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.Console()// 配置日志输出到控制台
+                .WriteTo.File("logserilog.txt", rollingInterval: RollingInterval.Day) //配置日志输出文件，生成周期每天
+                .CreateLogger();
+            try
+            {
+                Log.Information("Starting up");
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Application start-up failed");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
 
             CreateHostBuilder(args).Build().Run();
 
@@ -86,7 +86,7 @@ namespace AkliaJob.App
                     }
                 })
 
-                .UseSerilog()
+                //.UseSerilog()
                 .AddSerilog();
 
 
@@ -204,6 +204,14 @@ namespace AkliaJob.App
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+                }
+                finally
+                {
+                    if (client.State != WebSocketState.Closed)
+                    {
+                        client.Abort();
+                    }
+                    client.Dispose();
                 }
             });
 
