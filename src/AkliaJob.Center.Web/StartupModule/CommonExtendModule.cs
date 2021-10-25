@@ -38,7 +38,7 @@ namespace AkliaJob.Center.Web.StartupModule
             app.UseSwaggerService();
 
             //开启定时任务
-            app.StartJob();
+            //app.StartJob();
             return app;
         }
 

@@ -1,6 +1,7 @@
 ﻿using AkliaJob.App.Extensions;
 using AkliaJob.App.Services;
 using AkliaJob.Repository.Schedule;
+using AkliaJob.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,11 @@ namespace AkliaJob.App.StartupModels
             //添加Nlog日志
             //services.AddNLog();
 
-            IScheduleRepository scheduleRepository;
+            //IScheduleRepository scheduleRepository;
+            services.AddLogging();
+
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IAkliaUser, AkliaUser>();
 
             services.AddScoped<IScheduleRepository, ScheduleRepository>();
             services.AddScoped<ITestService, TestService>();

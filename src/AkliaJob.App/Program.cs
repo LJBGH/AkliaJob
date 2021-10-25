@@ -6,7 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Serilog.Events;
 using System;
+using System.IO;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -22,44 +24,36 @@ namespace AkliaJob.App
 
         static async Task Main(string[] args)
         {
-            //构建服务
-            //var serviceProvider = CommonServiceModel.ServicesBilder();
 
-            //var testService = serviceProvider.GetService<ITestService>();
-            //var logger = serviceProvider.GetLogger<Program>();
+            //IServiceCollection services = new ServiceCollection();
 
+            ////构建服务
+            //var servicePrivier = services.ServicesBilder();
+            //var testService = servicePrivier.GetService<ITestService>();
+            //var logger = servicePrivier.GetLogger<Program>();
 
-            //开启WenSockert连接
-            //var isConn  = await TryConnectWebSocket();
+            ////开启WenSockert连接
+            //var isConn = await TryConnectWebSocket();
 
-            //if (isConn) 
+            //if (isConn)
             //{
-            //    await Heartbeat();
-            //    await StartReceiving(client, testService, logger);
-
+            //    StartReceiving(client, testService, logger);
+            //    Heartbeat();
             //}
 
 
 
+            //Log.Logger = new LoggerConfiguration()
+            //   .MinimumLevel.Information()//最小的记录等级
+            //   .MinimumLevel.Override("Microsoft", LogEventLevel.Information)//对其他日志进行重写,除此之外,目前框架只有微软自带的日志组件
+            //   .WriteTo.Console()//输出到控制台
+            //   .CreateLogger();
 
-            Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .WriteTo.Console()// 配置日志输出到控制台
-                .WriteTo.File("logserilog.txt", rollingInterval: RollingInterval.Day) //配置日志输出文件，生成周期每天
-                .CreateLogger();
-            try
-            {
-                Log.Information("Starting up");
-                CreateHostBuilder(args).Build().Run();
-            }
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, "Application start-up failed");
-            }
-            finally
-            {
-                Log.CloseAndFlush();
-            }
+            //Log.Information("info");
+            //Log.Error("err");
+            //Log.Information("测试");
+
+            await Task.CompletedTask;
 
             CreateHostBuilder(args).Build().Run();
 
@@ -85,8 +79,6 @@ namespace AkliaJob.App
                         Heartbeat();
                     }
                 })
-
-                //.UseSerilog()
                 .AddSerilog();
 
 
@@ -117,7 +109,6 @@ namespace AkliaJob.App
 
                 var linkmage = new ArraySegment<byte>(Encoding.UTF8.GetBytes("客户端发送消息测试"));
                 await client.SendAsync(linkmage, WebSocketMessageType.Text, true, CancellationToken.None);
-
             }
             catch (Exception ex)
             {
@@ -155,7 +146,6 @@ namespace AkliaJob.App
                             Console.WriteLine(e.ToString());
                         }
                     }
-
                     i++;
                 }
             });

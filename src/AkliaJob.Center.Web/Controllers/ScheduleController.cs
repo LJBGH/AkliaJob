@@ -3,6 +3,7 @@ using AkliaJob.Services.Schedule;
 using AkliaJob.Shared;
 using AkliaJob.Shared.Controller;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using NSwag.Annotations;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,26 @@ namespace AkliaJob.Center.Web.Controllers
     public class ScheduleController : ApiControllerBase
     {
         private readonly IScheduleService _scheduleService;
+        private ILogger _logger;
+       
 
-        public ScheduleController(IScheduleService scheduleService)
+        public ScheduleController(/*IScheduleService scheduleService,*/ILogger<ScheduleController> logger)
         {
-            _scheduleService = scheduleService;
+            //_scheduleService = scheduleService;
+            _logger = logger;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [DisplayName("测试")]
+        public async Task Test()
+        {
+            _logger.LogError("测试sssssssssss");
+        }
 
         /// <summary>
         /// 开启任务调度

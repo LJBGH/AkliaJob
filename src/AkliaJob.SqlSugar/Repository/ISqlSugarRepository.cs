@@ -46,6 +46,13 @@ namespace AkliaJob.SqlSugar.Repository
         Task<AjaxResult> InsertAsync(T entity);
 
         /// <summary>
+        /// 无实体检查插入
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        Task<AjaxResult> InsertNoCheckAsync(T entity);
+
+        /// <summary>
         /// 批量插入
         /// </summary>
         /// <param name="entitys"></param>

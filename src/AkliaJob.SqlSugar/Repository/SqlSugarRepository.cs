@@ -110,6 +110,18 @@ namespace AkliaJob.SqlSugar.Repository
             return new AjaxResult(issuccess == true ? ResultMessage.InsertSuccess : ResultMessage.InsertFail, issuccess == true ? AjaxResultType.Success : AjaxResultType.Error);
         }
 
+        /// <summary>
+        /// 无实体检查插入
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public async Task<AjaxResult> InsertNoCheckAsync(T entity) 
+        {
+            var issuccess = await _dbContext.Insertable<T>(entity).ExecuteCommandAsync() > 0;
+            return new AjaxResult(issuccess == true ? ResultMessage.InsertSuccess : ResultMessage.InsertFail, issuccess == true ? AjaxResultType.Success : AjaxResultType.Error);
+        }
+
+
 
         /// <summary>
         /// 批量插入
