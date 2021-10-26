@@ -10,6 +10,7 @@ using System.Threading;
 using AkliaJob.Quertz;
 using Quartz.Spi;
 using AkliaJob.Quertz.Jobs;
+using AkliaJob.AutoMapper;
 
 namespace AkliaJob.Center.Web.StartupModule
 {
@@ -27,6 +28,8 @@ namespace AkliaJob.Center.Web.StartupModule
             service.AddHttpContextAccessor();
             service.AddSingleton<IAkliaUser, AkliaUser>();
 
+            //AutoMapper注入
+            service.AddAutoMapperService();
 
             //调度中心注入
             service.AddSingleton<IScheduleCenter, SchedulerCenter>();

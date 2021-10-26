@@ -24,3 +24,7 @@
 /src/AkliaJob.Quertz/bin
 /src/AkliaJob.App/obj
 /src/AkliaJob.App/bin
+/src/AkliaJob.AutoMapper/obj
+/src/AkliaJob.AutoMapper/bin
+/src/AkliaJob.Dto/obj
+/src/AkliaJob.Dto/bin

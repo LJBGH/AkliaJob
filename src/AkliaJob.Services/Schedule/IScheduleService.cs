@@ -1,4 +1,5 @@
-﻿using AkliaJob.Models.Schedule;
+﻿using AkliaJob.Dto.Schedule;
+using AkliaJob.Models.Schedule;
 using AkliaJob.Shared;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace AkliaJob.Services.Schedule
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<AjaxResult> InsertAsync(ScheduleEntity entity);
+        Task<AjaxResult> InsertAsync(ScheduleInputDto inputDto);
 
         /// <summary>
         /// 执行任务
@@ -52,6 +53,12 @@ namespace AkliaJob.Services.Schedule
         /// <param name="id"></param>
         /// <returns></returns>
         Task<AjaxResult> ResumeAsync(Guid id);
+
+        /// <summary>
+        /// 获取所有计划任务
+        /// </summary>
+        /// <returns></returns>
+        Task<AjaxResult> GetAllAsync();
 
     }
 }

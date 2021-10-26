@@ -1,4 +1,5 @@
-﻿using AkliaJob.Models.Schedule;
+﻿using AkliaJob.Dto.Schedule;
+using AkliaJob.Models.Schedule;
 using AkliaJob.Quertz;
 using AkliaJob.Repository.Schedule;
 using AkliaJob.Shared;
@@ -65,8 +66,9 @@ namespace AkliaJob.Services.Schedule
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public async Task<AjaxResult> InsertAsync(ScheduleEntity entity)
+        public async Task<AjaxResult> InsertAsync(ScheduleInputDto inputDto)
         {
+            var entity = inputDto.MapTo<ScheduleEntity>();       
             return await _scheduleRepository.InsertAsync(entity);
         }
 
@@ -148,6 +150,16 @@ namespace AkliaJob.Services.Schedule
             return new AjaxResult(result.Success == true ? "恢复任务成功" : "恢复任务失败", result.Success == true ? AjaxResultType.Success : AjaxResultType.Error);
         }
 
+        /// <summary>
+        /// 获取所有计划任务
+        /// </summary>
+        /// <returns></returns>
+        public async Task<AjaxResult> GetAllAsync()
+        {
+            var list = await _scheduleRepository.GetAsync();
+            var result = list.MapToList<ScheduleOutDto>();
 
+            return new AjaxResult(ResultMessage.LoadSucces, result, AjaxResultType.Success);
+        }
     }
 }

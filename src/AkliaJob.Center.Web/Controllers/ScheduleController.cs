@@ -1,4 +1,5 @@
-﻿using AkliaJob.Models.Schedule;
+﻿using AkliaJob.Dto.Schedule;
+using AkliaJob.Models.Schedule;
 using AkliaJob.Services.Schedule;
 using AkliaJob.Shared;
 using AkliaJob.Shared.Controller;
@@ -57,13 +58,13 @@ namespace AkliaJob.Center.Web.Controllers
         /// <summary>
         /// 添加一条任务计划
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="inputDto"></param>
         /// <returns></returns>
         [HttpPost]
         [DisplayName("添加一条任务计划")]
-        public async Task<AjaxResult> InsertAsync(ScheduleEntity entity) 
+        public async Task<AjaxResult> InsertAsync(ScheduleInputDto inputDto) 
         {
-            return await _scheduleService.InsertAsync(entity);
+            return await _scheduleService.InsertAsync(inputDto);
         }
 
         /// <summary>
@@ -100,6 +101,17 @@ namespace AkliaJob.Center.Web.Controllers
         public async Task<AjaxResult> ResumeAsync(Guid id)
         {
             return await _scheduleService.ResumeAsync(id);
+        }
+
+        /// <summary>
+        /// 获取有所计划任务
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [DisplayName("获取有所计划任务")]
+        public async Task<AjaxResult> GetAllAsync() 
+        {
+            return await _scheduleService.GetAllAsync();
         }
 
     }

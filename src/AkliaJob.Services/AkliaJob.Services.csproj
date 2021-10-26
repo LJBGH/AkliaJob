@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AkliaJob.Dto\AkliaJob.Dto.csproj" />
     <ProjectReference Include="..\AkliaJob.Quertz\AkliaJob.Quertz.csproj" />
     <ProjectReference Include="..\AkliaJob.Repository\AkliaJob.Repository.csproj" />
   </ItemGroup>

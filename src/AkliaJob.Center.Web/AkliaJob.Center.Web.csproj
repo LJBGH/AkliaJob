@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AkliaJob.AutoMapper\AkliaJob.AutoMapper.csproj" />
     <ProjectReference Include="..\AkliaJob.Quertz\AkliaJob.Quertz.csproj" />
     <ProjectReference Include="..\AkliaJob.Serilog\AkliaJob.Serilog.csproj" />
     <ProjectReference Include="..\AkliaJob.Services\AkliaJob.Services.csproj" />
