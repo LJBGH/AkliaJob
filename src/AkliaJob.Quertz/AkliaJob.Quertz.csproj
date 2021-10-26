@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AkliaJob.Models\AkliaJob.Models.csproj" />
+    <ProjectReference Include="..\AkliaJob.Repository\AkliaJob.Repository.csproj" />
+    <ProjectReference Include="..\AkliaJob.Serilog\AkliaJob.Serilog.csproj" />
   </ItemGroup>
 
 </Project>

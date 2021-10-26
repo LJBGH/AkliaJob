@@ -17,8 +17,7 @@ namespace AkliaJob.Shared
         /// <returns></returns>
         public static Type GetAssemblyClass(string assemblyName, string className) 
         {
-            //var assemblysService = AppDomain.CurrentDomain.GetAssemblies()
-            var assemblysService = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.Contains("AkliaJob.TaskService")).FirstOrDefault();
+            //var assemblysService = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.Contains("AkliaJob.Quertz")).FirstOrDefault();
             Assembly assembly = Assembly.Load(new AssemblyName(assemblyName));
             Type type = assembly.GetType(className);
             return type;

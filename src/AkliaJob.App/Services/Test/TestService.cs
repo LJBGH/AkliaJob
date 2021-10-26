@@ -1,6 +1,6 @@
 ﻿using AkliaJob.Models.Schedule;
 using AkliaJob.Repository.Schedule;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace AkliaJob.App.Services
         private readonly IScheduleRepository _scheduleRepository;
         private readonly ILogger _logger;
 
-        public TestService(IScheduleRepository scheduleRepository,ILogger<TestService> logger)
+        public TestService(IScheduleRepository scheduleRepository,ILogger logger)
         {
             _scheduleRepository = scheduleRepository;
             _logger = logger;
@@ -39,7 +39,7 @@ namespace AkliaJob.App.Services
             var data = await _scheduleRepository.InsertNoCheckAsync(schedule);
             if (data.Success) 
             {
-                _logger.LogInformation("插入数据测试成功");
+                _logger.Information("插入数据测试成功");
             }
         }
     }

@@ -9,15 +9,16 @@ using AkliaJob.Services.Schedule;
 using System.Threading;
 using AkliaJob.Quertz;
 using Quartz.Spi;
-using AkliaJob.TaskService;
+using AkliaJob.Quertz.Jobs;
 
 namespace AkliaJob.Center.Web.StartupModule
 {
-    /// <summary>
-    /// 公共拓展模块注入
-    /// </summary>
+  
     public static class CommonExtendModule
     {
+        /// <summary>
+        /// 公共拓展模块注入
+        /// </summary>
         public static void AddCommonService(this IServiceCollection service) 
         {
             //swagger注入
@@ -26,14 +27,35 @@ namespace AkliaJob.Center.Web.StartupModule
             service.AddHttpContextAccessor();
             service.AddSingleton<IAkliaUser, AkliaUser>();
 
+
             //调度中心注入
-            service.AddSingleton<IJobFactory, IOCJobFactory>();
             service.AddSingleton<IScheduleCenter, SchedulerCenter>();
 
-            service.AddTransient(typeof(TestJob));
-           
+            //Job定时任务注入
+            service.AddJobService();  
         }
 
+
+
+        /// <summary>
+        /// Job定时任务注入
+        /// </summary>
+        /// <param name="services"></param>
+        public static void AddJobService(this IServiceCollection services) 
+        {
+            services.AddSingleton<IJobFactory, IOCJobFactory>();
+            List<Type> jobtype = new List<Type>();
+            jobtype.Add(typeof(TestJob));
+            foreach (var item in jobtype)
+            {
+                services.AddSingleton(item);//Job使用瞬时依赖注入
+            }
+        }
+
+
+
+
+        //公共中间件
         public static IApplicationBuilder UseCommonExtension(this IApplicationBuilder app) 
         {
             app.UseSwaggerService();
@@ -44,6 +66,7 @@ namespace AkliaJob.Center.Web.StartupModule
         }
 
 
+        //开启定时任务
         public static void StartJob(this IApplicationBuilder app)
         {
             var scheduleService = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<IScheduleService>();

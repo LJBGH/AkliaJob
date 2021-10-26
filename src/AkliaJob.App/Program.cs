@@ -24,45 +24,16 @@ namespace AkliaJob.App
 
         static async Task Main(string[] args)
         {
-
-            //IServiceCollection services = new ServiceCollection();
-
-            ////构建服务
-            //var servicePrivier = services.ServicesBilder();
-            //var testService = servicePrivier.GetService<ITestService>();
-            //var logger = servicePrivier.GetLogger<Program>();
-
-            ////开启WenSockert连接
-            //var isConn = await TryConnectWebSocket();
-
-            //if (isConn)
-            //{
-            //    StartReceiving(client, testService, logger);
-            //    Heartbeat();
-            //}
-
-
-
-            //Log.Logger = new LoggerConfiguration()
-            //   .MinimumLevel.Information()//最小的记录等级
-            //   .MinimumLevel.Override("Microsoft", LogEventLevel.Information)//对其他日志进行重写,除此之外,目前框架只有微软自带的日志组件
-            //   .WriteTo.Console()//输出到控制台
-            //   .CreateLogger();
-
-            //Log.Information("info");
-            //Log.Error("err");
-            //Log.Information("测试");
-
             await Task.CompletedTask;
 
             CreateHostBuilder(args).Build().Run();
-
         }
 
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                //.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                 //.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                 .AddSerilog()
                 .ConfigureServices(async (hostContext, services) =>
                 {
                     //构建服务
@@ -78,8 +49,8 @@ namespace AkliaJob.App
                         StartReceiving(client, testService, logger);
                         Heartbeat();
                     }
-                })
-                .AddSerilog();
+                });
+               
 
 
         /// <summary>
@@ -183,7 +154,7 @@ namespace AkliaJob.App
                                 //文本类型消息
                                 if (result.MessageType == WebSocketMessageType.Text)
                                 {
-                                    //await testService.TestAsync();
+                                    await testService.TestAsync();
                                     string msg = Encoding.UTF8.GetString(buffer, 0, result.Count);
                                     logger.LogInformation($"{msg}");
                                 }

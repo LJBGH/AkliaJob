@@ -9,7 +9,8 @@ using AkliaJob.Quertz.Server;
 using Quartz.Impl.Matchers;
 using System.Collections.Generic;
 using Quartz.Spi;
-using Microsoft.Extensions.Logging;
+using AkliaJob.Quertz.Jobs;
+using Serilog;
 
 namespace AkliaJob.Quertz
 {
@@ -34,7 +35,7 @@ namespace AkliaJob.Quertz
         private readonly IJobFactory _jobFactory;
 
         private readonly ILogger _logger;
-        public SchedulerCenter(IJobFactory jobFactory, ILogger<SchedulerCenter> logger)
+        public SchedulerCenter(IJobFactory jobFactory, ILogger logger)
         {
             _scheduler = Scheduler;
             _jobFactory = jobFactory;
@@ -81,14 +82,15 @@ namespace AkliaJob.Quertz
                     //等待任务运行完成
                     await this._scheduler.Result.Start();
                 }
-                return new QuartzNetResult("任务调度开启成功");
+               
+                await this._scheduler.Result.Start();
+                foreach (var item in schedules)
+                {
+                    ScheduleManage.Instance.AddScheduleList(item);
+                    await this.RunSchedule<ScheduleManage>(item.JobName, item.JobGroup);
+                }
 
-                //await this._scheduler.Result.Start();
-                //foreach (var item in schedules)
-                //{
-                //    ScheduleManage.Instance.AddScheduleList(item);
-                //    await this.RunSchedule<ScheduleManage>(item.JobName, item.JobGroup);
-                //}
+                return new QuartzNetResult("任务调度开启成功");
             }
             catch (Exception ex)
             {
@@ -178,7 +180,6 @@ namespace AkliaJob.Quertz
                 else
                 {
                     result = new QuartzNetResult("启动失败", false);
-
                 }
             }
             catch (Exception ex)
@@ -186,7 +187,6 @@ namespace AkliaJob.Quertz
                 Console.WriteLine(ex.Message);
                 throw;
             }
-            
             return result;
         }
 
@@ -198,9 +198,14 @@ namespace AkliaJob.Quertz
         private async Task<QuartzNetResult> AddScheduleJob(ScheduleEntity schedule)
         {
             var result = new QuartzNetResult("");
-
             try
             {
+                if (schedule == null) 
+                {
+                    result.Success = false;
+                    result.Msg = "计划任务不存在";
+                    return result;
+                }
                 //检查任务是否已存在
                 var jk = new JobKey(schedule.JobName, schedule.JobGroup);
                 if (await this._scheduler.Result.CheckExists(jk))
@@ -210,7 +215,7 @@ namespace AkliaJob.Quertz
                 }
 
                 //反射获取任务执行类
-                var jobType = AssemblyExtension.GetAssemblyClass("AkliaJob.TaskService", "AkliaJob.TaskService.TestJob");
+                var jobType = AssemblyExtension.GetAssemblyClass("AkliaJob.Quertz", "AkliaJob.Quertz.Jobs.TestJob");
 
                 // 定义这个工作，并将其绑定到我们的IJob实现类
                 IJobDetail job = new JobDetailImpl(schedule.JobName, schedule.JobGroup, jobType);
@@ -227,7 +232,7 @@ namespace AkliaJob.Quertz
                     trigger = CreateSimpleTrigger(schedule);
                 }
                 // 设置监听器
-                JobListener listener = new JobListener();
+                JobListener listener = new JobListener(_logger);
                 this._scheduler.Result.ListenerManager.AddJobListener(listener, GroupMatcher<JobKey>.AnyGroup());
 
                 // 告诉调度器使用触发器来安排作业
@@ -240,7 +245,6 @@ namespace AkliaJob.Quertz
                 result.Success = false;
                 result.Msg = ex.Message;
             }
-
             return result;
         }
 

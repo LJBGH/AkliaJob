@@ -29,18 +29,6 @@ namespace AkliaJob.Center.Web.Controllers
             _logger = logger;
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [DisplayName("测试")]
-        public async Task Test()
-        {
-            _logger.LogError("测试sssssssssss");
-        }
-
         /// <summary>
         /// 开启任务调度
         /// </summary>

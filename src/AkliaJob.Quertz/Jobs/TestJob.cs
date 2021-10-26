@@ -4,7 +4,7 @@ using Quartz;
 using System;
 using System.Threading.Tasks;
 
-namespace AkliaJob.TaskService
+namespace AkliaJob.Quertz.Jobs
 {
     public class TestJob : IJob
     {
@@ -12,9 +12,9 @@ namespace AkliaJob.TaskService
         private readonly IScheduleRepository _scheduleRepository;
         private readonly ILogger _logger;
 
-        public TestJob(IScheduleRepository scheduleRepository /*ILogger<TestJob> logger*/)
+        public TestJob(/*IScheduleRepository scheduleRepository*/ /*ILogger<TestJob> logger*/)
         {
-            _scheduleRepository = scheduleRepository;
+            //_scheduleRepository = scheduleRepository;
             //_logger = logger;
         }
 

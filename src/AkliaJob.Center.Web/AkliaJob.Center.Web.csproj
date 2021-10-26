@@ -24,7 +24,6 @@
     <ProjectReference Include="..\AkliaJob.Services\AkliaJob.Services.csproj" />
     <ProjectReference Include="..\AkliaJob.Shared\AkliaJob.Shared.csproj" />
     <ProjectReference Include="..\AkliaJob.Swagger\AkliaJob.Swagger.csproj" />
-    <ProjectReference Include="..\AkliaJob.TaskService\AkliaJob.TaskService.csproj" />
   </ItemGroup>
 
 </Project>
