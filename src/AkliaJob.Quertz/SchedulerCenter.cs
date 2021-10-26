@@ -29,13 +29,12 @@ namespace AkliaJob.Quertz
         //}
 
 
-
         private Task<IScheduler> _scheduler;
 
         private readonly IJobFactory _jobFactory;
 
         private readonly ILogger _logger;
-        public SchedulerCenter(IJobFactory jobFactory, ILogger logger)
+        public SchedulerCenter(IJobFactory jobFactory, ILogger<SchedulerCenter> logger)
         {
             _scheduler = Scheduler;
             _jobFactory = jobFactory;

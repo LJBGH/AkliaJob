@@ -23,9 +23,9 @@ namespace AkliaJob.Center.Web.Controllers
         private ILogger _logger;
        
 
-        public ScheduleController(/*IScheduleService scheduleService,*/ILogger<ScheduleController> logger)
+        public ScheduleController(IScheduleService scheduleService, ILogger<ScheduleController> logger)
         {
-            //_scheduleService = scheduleService;
+            _scheduleService = scheduleService;
             _logger = logger;
         }
 

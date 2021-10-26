@@ -46,7 +46,7 @@ namespace AkliaJob.Center.Web
 
             app.UseCommonExtension();
             //自定义中间件拓展
-            app.CustomerMiddleware();
+            //app.CustomerMiddleware();
 
             app.UseRouting();
 

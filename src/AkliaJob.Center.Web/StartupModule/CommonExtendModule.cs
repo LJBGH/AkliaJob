@@ -27,8 +27,9 @@ namespace AkliaJob.Center.Web.StartupModule
             service.AddSingleton<IAkliaUser, AkliaUser>();
 
             //调度中心注入
-            service.AddSingleton<IScheduleCenter, SchedulerCenter>();
             service.AddSingleton<IJobFactory, IOCJobFactory>();
+            service.AddSingleton<IScheduleCenter, SchedulerCenter>();
+
             service.AddTransient(typeof(TestJob));
            
         }
