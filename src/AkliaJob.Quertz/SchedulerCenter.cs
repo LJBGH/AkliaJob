@@ -39,6 +39,10 @@ namespace AkliaJob.Quertz
         {
             _scheduler = Scheduler;
             _jobFactory = jobFactory;
+
+            //使用实现的自定义Job工厂，为了Job中可使用构造函数注入外部服务（很重要）
+            this._scheduler.Result.JobFactory = this._jobFactory;
+
             _logger = logger;
 
         }
@@ -76,7 +80,6 @@ namespace AkliaJob.Quertz
         {
             try
             {
-                this._scheduler.Result.JobFactory = this._jobFactory;
                 if (!this._scheduler.Result.IsStarted) 
                 {
                     //等待任务运行完成
