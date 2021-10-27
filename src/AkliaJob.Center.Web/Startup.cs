@@ -44,9 +44,11 @@ namespace AkliaJob.Center.Web
                 app.UseDeveloperExceptionPage();
             }
 
+            //公共组件配置
             app.UseCommonExtension();
-            //自定义中间件拓展
-            //app.CustomerMiddleware();
+
+            //自定义异常中间件
+            app.CustomerMiddleware();
 
             app.UseRouting();
 
