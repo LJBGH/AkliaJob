@@ -1,5 +1,4 @@
-﻿using AkliaJob.App.Extensions;
-using AkliaJob.App.Services;
+﻿using AkliaJob.App.Services;
 using AkliaJob.Repository.Schedule;
 using AkliaJob.Shared;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,12 +18,6 @@ namespace AkliaJob.App.StartupModels
         /// <returns></returns>
         public static IServiceProvider ServicesBilder(this IServiceCollection services) 
         {
-            //IServiceCollection services = new ServiceCollection();
-
-            //添加Nlog日志
-            //services.AddNLog();
-
-            //IScheduleRepository scheduleRepository;
             services.AddLogging();
 
             services.AddHttpContextAccessor();

@@ -1,5 +1,4 @@
-﻿using AkliaJob.App.Extensions;
-using AkliaJob.App.Services;
+﻿using AkliaJob.App.Services;
 using AkliaJob.App.StartupModels;
 using AkliaJob.Shared;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +12,7 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AkliaJob.Serilog;
 
 namespace AkliaJob.App
 {

@@ -21,7 +21,18 @@ namespace AkliaJob.Swagger
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc(_version, new OpenApiInfo { Title = _title, Version = _version, Description = "基于Quertz的任务调度平台" });
+                c.SwaggerDoc(_version, new OpenApiInfo 
+                { 
+                    Title = _title, 
+                    Version = _version, 
+                    Description = "基于Quertz的任务调度平台",
+                    Contact = new OpenApiContact 
+                    {
+                        Name = "AkliaJob.API",
+                        Email = "1983810978@qq.com",
+                        Url = new System.Uri("https://github.com/YANGKANG01/QuartzNetJob")
+                    }
+                });
 
                 // 获取xml文件路径
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;

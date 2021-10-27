@@ -22,7 +22,8 @@ namespace AkliaJob.AutoMapper
                 CreateMapping<AkliaAutoMapperAttribute>(suktAutoMapTypes, mapper);
             },
             assemblys,
-            ServiceLifetime.Singleton);
+            ServiceLifetime.Singleton
+            );
             var mapper = service.GetBuildService<IMapper>();//获取autoMapper实例
             AutoMapperHelper.SetMapper(mapper);
         }
@@ -43,6 +44,7 @@ namespace AkliaJob.AutoMapper
                     return;
                 }
                 foreach (var tatgetType in attribute.TargetTypes)
+
                 {
                     ///判断是To
                     if (attribute.MapDirection.HasFlag(AkliaAutoMapDirection.To))

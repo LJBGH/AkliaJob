@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SocketClient\**" />
+    <EmbeddedResource Remove="SocketClient\**" />
+    <None Remove="SocketClient\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="appsettings.json" />
   </ItemGroup>
 
@@ -25,10 +31,6 @@
   <ItemGroup>
     <ProjectReference Include="..\AkliaJob.Repository\AkliaJob.Repository.csproj" />
     <ProjectReference Include="..\AkliaJob.Serilog\AkliaJob.Serilog.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="SocketClient\" />
   </ItemGroup>
 
 </Project>
