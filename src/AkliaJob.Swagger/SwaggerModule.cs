@@ -23,12 +23,12 @@ namespace AkliaJob.Swagger
             {
                 c.SwaggerDoc(_version, new OpenApiInfo 
                 { 
-                    Title = _title, 
+                    Title = _title + " 接口文档", 
                     Version = _version, 
                     Description = "基于Quertz的任务调度平台",
                     Contact = new OpenApiContact 
                     {
-                        Name = "AkliaJob.API",
+                        Name = _title,
                         Email = "1983810978@qq.com",
                         Url = new System.Uri("https://github.com/YANGKANG01/QuartzNetJob")
                     }
@@ -61,7 +61,7 @@ namespace AkliaJob.Swagger
             });
             app.UseSwaggerUI(c => 
             {
-                c.SwaggerEndpoint(_url, _version);
+                c.SwaggerEndpoint(_url, _title);
                 c.RoutePrefix = string.Empty;
             } );
             return app;
