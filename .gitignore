@@ -28,3 +28,5 @@
 /src/AkliaJob.AutoMapper/bin
 /src/AkliaJob.Dto/obj
 /src/AkliaJob.Dto/bin
+/src/AkliaJob.Consul/obj
+/src/AkliaJob.Consul/bin

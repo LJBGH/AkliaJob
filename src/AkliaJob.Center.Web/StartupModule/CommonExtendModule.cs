@@ -11,6 +11,7 @@ using AkliaJob.Quertz;
 using Quartz.Spi;
 using AkliaJob.Quertz.Jobs;
 using AkliaJob.AutoMapper;
+using AkliaJob.Consul;
 
 namespace AkliaJob.Center.Web.StartupModule
 {
@@ -35,7 +36,8 @@ namespace AkliaJob.Center.Web.StartupModule
             service.AddSingleton<IScheduleCenter, SchedulerCenter>();
 
             //Job定时任务注入
-            service.AddJobService();  
+            service.AddJobService();
+
         }
 
 
@@ -61,6 +63,10 @@ namespace AkliaJob.Center.Web.StartupModule
         //公共中间件
         public static IApplicationBuilder UseCommonExtension(this IApplicationBuilder app) 
         {
+            //Consul配置
+            app.UseConsul();
+
+            //Swagger配置
             app.UseSwaggerService();
 
             //开启定时任务

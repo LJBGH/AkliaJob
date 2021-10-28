@@ -2,7 +2,7 @@
 
 namespace AkliaJob.Shared.Controller
 {
-    [Route("api/[controller]/[action]")]
+    [Route("akliajob/[controller]/[action]")]
     [ApiController]
     public abstract class ApiControllerBase : ControllerBase
     {
