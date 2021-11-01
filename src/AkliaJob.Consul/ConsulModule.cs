@@ -40,12 +40,14 @@ namespace AkliaJob.Consul
         {
             _consulIp = Appsettings.app(new string[] { "Consul", "IP" });
             _consulPort = Convert.ToInt32(Appsettings.app(new string[] { "Consul", "Port" }));
+            _ip = Appsettings.app(new string[] { "Service", "IP" });
             _Prot = Convert.ToInt32(Appsettings.app(new string[] { "Service", "Port" }));
             _serviceName = Appsettings.app(new string[] { "Service", "Name" });
 
             ConsulServiceEntity serviceEntity = new ConsulServiceEntity
             {
-                IP = NetworkHelper.LocalIPAddress,
+                //IP = NetworkHelper.LocalIPAddress,
+                IP = _ip,
                 Port = _Prot,//如果使用的是docker 进行部署这个需要和dockerfile中的端口保证一致
                 ServiceName = _serviceName,
                 ConsulIP = _consulIp,
@@ -59,8 +61,8 @@ namespace AkliaJob.Consul
             {
                 DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(5),//服务启动多久后注册
                 Interval = TimeSpan.FromSeconds(10),//健康检查时间间隔，或者称为心跳间隔
-                //HTTP = $"http://{serviceEntity.IP}:{serviceEntity.Port}/api/health",//健康检查地址
-                HTTP = $"http://{"192.168.88.74"}:{serviceEntity.Port}/api/health",//健康检查地址  如果是本地则IP为localhost ，如果是发布到服务端，则使用服务端IP
+                HTTP = $"http://{serviceEntity.IP}:{serviceEntity.Port}/api/health",//健康检查地址
+                //HTTP = $"http://{"192.168.88.74"}:{serviceEntity.Port}/api/health",//健康检查地址  如果是本地则IP为localhost ，如果是发布到服务端，则使用服务端IP
                 Timeout = TimeSpan.FromSeconds(1)
             };
 
