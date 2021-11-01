@@ -64,7 +64,7 @@ namespace AkliaJob.Center.Web.StartupModule
         public static IApplicationBuilder UseCommonExtension(this IApplicationBuilder app) 
         {
             //Consul配置
-            app.UseConsul();
+            //app.UseConsul();
 
             //Swagger配置
             app.UseSwaggerService();
