@@ -33,7 +33,6 @@ namespace AkliaJob.Center.Web.Controllers
         /// <summary>
         /// 开启任务调度
         /// </summary>
-        /// <param name="entity"></param>
         /// <returns></returns>
         [HttpGet]
         [DisplayName("开启任务调度")]
@@ -45,7 +44,6 @@ namespace AkliaJob.Center.Web.Controllers
         /// <summary>
         /// 停止任务调度
         /// </summary>
-        /// <param name="entity"></param>
         /// <returns></returns>
         [HttpGet]
         [DisplayName("停止任务调度")]
