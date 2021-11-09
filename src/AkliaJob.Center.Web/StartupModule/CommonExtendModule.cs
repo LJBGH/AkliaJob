@@ -12,6 +12,7 @@ using Quartz.Spi;
 using AkliaJob.Quertz.Jobs;
 using AkliaJob.AutoMapper;
 using AkliaJob.Consul;
+using AkliaJob.SqlSugar.Repository;
 
 namespace AkliaJob.Center.Web.StartupModule
 {
@@ -26,14 +27,19 @@ namespace AkliaJob.Center.Web.StartupModule
             //swagger注入
             service.AddSwaggerService();
 
+
             service.AddHttpContextAccessor();
             service.AddSingleton<IAkliaUser, AkliaUser>();
+
+            service.AddScoped(typeof(ISqlSugarRepository<>),typeof(SqlSugarRepository<>));
 
             //AutoMapper注入
             service.AddAutoMapperService();
 
             //调度中心注入
             service.AddSingleton<IScheduleCenter, SchedulerCenter>();
+
+
 
             //Job定时任务注入
             service.AddJobService();

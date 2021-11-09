@@ -3,6 +3,7 @@ using AkliaJob.Models.Schedule;
 using AkliaJob.Quertz;
 using AkliaJob.Repository.Schedule;
 using AkliaJob.Shared;
+using AkliaJob.SqlSugar.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,12 @@ namespace AkliaJob.Services.Schedule
         private readonly IScheduleRepository _scheduleRepository;
         private readonly IScheduleCenter _scheduleCenter;
 
-        public ScheduleService(IScheduleRepository scheduleRepository, IScheduleCenter scheduleCenter)
+        private readonly ISqlSugarRepository<ScheduleEntity> _sqlSugarRepository;
+
+        public ScheduleService(IScheduleRepository scheduleRepository, IScheduleCenter scheduleCenter, ISqlSugarRepository<ScheduleEntity> sqlSugarRepository)
         {
+
+            _sqlSugarRepository = sqlSugarRepository;
             _scheduleRepository = scheduleRepository;
             _scheduleCenter = scheduleCenter;
         }
@@ -68,8 +73,11 @@ namespace AkliaJob.Services.Schedule
         /// <returns></returns>
         public async Task<AjaxResult> InsertAsync(ScheduleInputDto inputDto)
         {
-            var entity = inputDto.MapTo<ScheduleEntity>();       
-            return await _scheduleRepository.InsertAsync(entity);
+           
+
+            var entity = inputDto.MapTo<ScheduleEntity>();
+            return await _sqlSugarRepository.InsertAsync(entity);
+            //return await _scheduleRepository.InsertAsync(entity);
         }
 
 
