@@ -3,13 +3,13 @@ using SqlSugar;
 using System;
 using System.ComponentModel;
 
-namespace AkliaJob.Models.Schedule
+namespace UnitTest
 {
     /// <summary>
     /// 任务计划表
     /// </summary>
-    [SugarTable("Schedule")]
-    //[SplitTable(SplitType.Year)]
+    [SugarTable("Schedule1")]
+    [SplitTable(SplitType.Month)]
     public class ScheduleEntity : IFullAuditedEntity
     {
         /// <summary>

@@ -10,7 +10,7 @@ namespace UnitTest
         public void TestMethod1()
         {
 
-            
+
             SqlSugarClient db = new SqlSugarClient(new ConnectionConfig()
             {
                 ConnectionString = "Data Source=101.34.154.180,51433;Initial Catalog=LabelTest;uid=sa;pwd=Pass@Word;",//Á¬½Ó·û×Ö´®
@@ -20,7 +20,9 @@ namespace UnitTest
             });
 
             //DbFirst²âÊÔ
-            db.CodeFirst.InitTables(typeof(/*LabelEntity*/ string));
+            db.CodeFirst.SplitTables().InitTables<ScheduleEntity>();
+
+            //db.CodeFirst.sp
         }
     }
 }
