@@ -30,3 +30,5 @@
 /src/AkliaJob.Dto/bin
 /src/AkliaJob.Consul/obj
 /src/AkliaJob.Consul/bin
+/src/UnitTest/obj
+/src/UnitTest/bin
