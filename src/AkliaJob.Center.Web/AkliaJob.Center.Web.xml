@@ -24,14 +24,12 @@
             <summary>
             开启任务调度
             </summary>
-            <param name="entity"></param>
             <returns></returns>
         </member>
         <member name="M:AkliaJob.Center.Web.Controllers.ScheduleController.StopScheduleAsync">
             <summary>
             停止任务调度
             </summary>
-            <param name="entity"></param>
             <returns></returns>
         </member>
         <member name="M:AkliaJob.Center.Web.Controllers.ScheduleController.InsertAsync(AkliaJob.Dto.Schedule.ScheduleInputDto)">
