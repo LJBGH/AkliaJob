@@ -18,8 +18,10 @@ namespace AkliaJob.Center.Web
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory()) //添加autofac服务,将内置容器替换为autofac容器
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>()
+                     .UseUrls("https://*:443");
                 })
+                               
             //添加Serilog日志中间件
             .AddSerilog();
     }

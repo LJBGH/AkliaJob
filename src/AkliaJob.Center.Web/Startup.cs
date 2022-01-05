@@ -44,6 +44,11 @@ namespace AkliaJob.Center.Web
                 app.UseDeveloperExceptionPage();
             }
 
+
+            //启用Https
+            app.UseHttpsRedirection();
+
+
             //公共组件配置
             app.UseCommonExtension();
 
